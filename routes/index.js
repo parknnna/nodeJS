@@ -70,7 +70,7 @@ router.post('/insert2', upload.single("file"), function (req, res) {
                 res.redirect('/content?no=' + body.no);
             }
         })
-         
+         //test
     }else{
         var body = req.body;
         let file = req.file;
