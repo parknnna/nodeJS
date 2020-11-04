@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<script>
+  function check(){
+    if(f.title.value==""){
+      alert("제목을 적으세요");
+      return;
+    }
+    else if(f.name.value==""){
+      alert("이름을 적으세요");
+      return;
+    }
+    else if(f.content.value==""){
+     alert("내용을 적으세요");
+     return;
+    }
+    else document.f.submit();
+  }
+</script>
+<html>
+  <head>
+    <title>insert</title>
+  </head>
+  <body>
+    <h1>글쓰기</h1>
+    <form name="f" action="/insert2" method="POST" enctype="multipart/form-data">
+        <table width="100%">
+            <tr><td>제목</td><td><input type="text" name="title"></td></tr>
+            <tr><td>글쓴이</td><td><input type="text" name="name" value="<%=session.user.id%>" readonly></td></tr>
+            <tr><td>내용</td><td><textarea name="content" cols="40" rows="7"></textarea></td></tr>
+            <tr><td>사진</td><td><input type="file" name="file"></td></tr>
+            <tr><td colspan="2"><input type="button" value="쓰기" onclick="javascript:check();"></td></tr>
+        </table>
+    </form>
+  </body>
+</html>
