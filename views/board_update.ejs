@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>board update</title>
+        <script>
+            function check() {
+                if (f.title.value == "") {
+                    alert("제목을 적으세요");
+                    return;
+                } else if (f.name.value == "") {
+                    alert("이름을 적으세요");
+                    return;
+                } else if (f.content.value == "") {
+                    alert("내용을 적으세요");
+                    return;
+                } else 
+                    document
+                        .f
+                        .submit();
+                }
+        </script>
+    </head>
+    <body>
+        <h1>board update</h1>
+        <form
+            name="f"
+            action="/board_update"
+            method="POST"
+            enctype="multipart/form-data">
+            <input type="hidden" value="<%=board[0].no%>" name="no">
+            <table width="100%">
+                <tr>
+                    <td>제목</td>
+                    <td><input type="text" name="title" value="<%=board[0].title%>"></td>
+                </tr>
+                <tr>
+                    <td>글쓴이</td>
+                    <td><input type="text" name="name" value="<%=board[0].name%>" readonly="readonly"></td>
+                </tr>
+                <tr>
+                    <td>내용</td>
+                    <td>
+                        <textarea name="content" cols="40" rows="7"><%=board[0].title%></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>사진</td>
+                    <td><input type="file" name="file"></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="button" value="쓰기" onclick="javascript:check();"></td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

@@ -1,45 +1,47 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>board</title>
-    <script>
-      function logcheck(a){
-        if(a){
-          location.href="/insert";
-        }else{
-          alert("로그인 하셔야합니다");
-        }
-      }
-    </script>
-  </head>
-  <body>
-    <h1>board</h1>
-    <div align="right" width="100%">
-      <%if(session.login){%>
-        <a href="/logout">로그아웃</a>
-        <%}else{%>
-          <a href="/login">로그인</a>
-      <%}%>
-      <br>
-      <button onclick="javascript:logcheck('<%=session.login%>');">글쓰기</button>
-    </div>
-    <table width="100%">
-      <tr>
-        <th>번호</th>
-        <th>글쓴이</th>
-        <th>제목</th>
-      </tr>
-      <%
+    <head>
+        <title>board</title>
+        <script>
+            function logcheck(a) {
+                if (a) {
+                    location.href = "/insert";
+                } else {
+                    alert("로그인 하셔야합니다");
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <h1>board</h1>
+        <div align="right" width="100%">
+            <%if(session.login){%>
+                <a href="/logout">로그아웃</a>
+            <%}else{%>
+                <a href="/login">로그인</a>
+            <%}%>
+            <br>
+            <button onclick="javascript:logcheck('<%=session.login%>');">글쓰기</button>
+        </div>
+        <table width="100%">
+            <tr>
+                <th>번호</th>
+                <th>글쓴이</th>
+                <th>제목</th>
+            </tr>
+            <%
       for(var i=0;i<list.length;i++){
         %>
-          <tr align="center">
-            <td><%=list[i].no %></td>
-            <td><%=list[i].name %></td>
-            <td><a href="/content?no=<%=list[i].no%>"><%=list[i].title %></a></td>
-          </tr>
-        <%
+                <tr align="center">
+                    <td><%=list[i].no %></td>
+                    <td><%=list[i].name %></td>
+                    <td>
+                        <a href="/content?no=<%=list[i].no%>"><%=list[i].title %></a>
+                    </td>
+                </tr>
+            <%
       }
     %>
-    </table>
-  </body>
+        </table>
+    </body>
 </html>

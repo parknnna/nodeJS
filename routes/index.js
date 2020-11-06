@@ -55,13 +55,14 @@ router.get('/insert', function (req, res) {
 
 router.post('/insert2', upload.single("file"), function (req, res) {
     var mode = req.query.mode;
+    var member_no= req.session.user.member_no;
     if(mode!=undefined){
         var re=req.body.re;
         var body = req.query;
         
-        sql = 'insert into board values(null,1,?,?,null,null,?,1)';
+        sql = 'insert into board values(null,1,?,?,null,null,?,1,?)';
         var params = [
-            re,req.session.user.id, body.reg
+            re,req.session.user.id, body.reg,member_no
         ];
         conn.query(sql, params, function (err) {
             if (err) 
@@ -70,14 +71,13 @@ router.post('/insert2', upload.single("file"), function (req, res) {
                 res.redirect('/content?no=' + body.no);
             }
         })
-         //test
     }else{
         var body = req.body;
         let file = req.file;
         if(file){
-            var sql = 'INSERT INTO BOARD VALUES(null, ?, ?, ?, ?, ? ,(select ifnull(max(no),0) from board d),0)';
+            var sql = 'INSERT INTO BOARD VALUES(null, ?, ?, ?, ?, ? ,(select ifnull(max(no),0) from board d),0,?)';
             
-            var params = [body.title, body.content, body.name, file.originalname, file.size];
+            var params = [body.title, body.content, body.name, file.originalname, file.size,member_no];
             conn.query(sql, params, function (err) {
                 if (err) console.log('query is not excuted. insert fail...\n' + err);
                 else 
@@ -85,11 +85,11 @@ router.post('/insert2', upload.single("file"), function (req, res) {
                 }
             );
         }else{
-            var sql = 'INSERT INTO BOARD VALUES(null, ?, ?, ?, null, 0 ,(select ifnull(max(no),0) from board d),0)';
+            var sql = 'INSERT INTO BOARD VALUES(null, ?, ?, ?, null, 0 ,(select ifnull(max(no),0) from board d),0,?)';
             
-            var params = [body.title, body.content, body.name];
+            var params = [body.title, body.content, body.name,member_no];
             conn.query(sql, params, function (err) {
-                if (err) console.log('query is not excuted. insert fail...\n' + err);
+                if (err) console.log('query is not excuted. insert fail...111\n' + err);
                 else 
                     res.redirect('/board');
                 }
@@ -111,7 +111,8 @@ router.get('/content', function (req, res) {
                 else {
                     res.render('content', {
                         list: rows,
-                        re_list : rows2
+                        re_list : rows2,
+                        session : req.session
                     });
                 }
             })
@@ -123,19 +124,23 @@ router.get('/content', function (req, res) {
 
 router.get('/delete', function (req, res) {
     var par = req.query.no;
+    var mode = req.query.mode;
     var sql = 'select * from board where no=?';
     var filename = "";
     conn.query(sql, par, function (err, rows, fileds) {
         if (err) 
-            console("1번쨰 에러");
+            console.log(err);
         else {
             filename = rows[0].filename;
+            if(filename==undefined){
+                filename="";
+            }
             sql = 'select count(*) as crow from test.board where filename = ?';
             conn.query(sql, filename, function (err, rows, fileds) {
                 if (err) 
-                    console.log('error' + err);
+                    console.log('파일에러:' + err);
                 else {
-                    if (rows[0].crow < 2) {
+                    if (rows[0].crow == 1) {
                         fs.unlink('upload/' + filename, function (err) { //사진삭제
                             if (err) 
                                 throw err;
@@ -148,7 +153,8 @@ router.get('/delete', function (req, res) {
                         if (err) 
                             console.log('query is not\n' + err);
                         else {
-                            res.redirect('/board');
+                            if(mode==undefined) res.redirect('/board');
+                            else res.redirect('/content?no='+mode);
                         }
                     });
                 }
@@ -156,4 +162,31 @@ router.get('/delete', function (req, res) {
         }
     });
 });
+
+router.get('/board_update',function(req,res){
+    var sql = 'select * from board where no = ?';
+    conn.query(sql,req.query.no,function(err,rows,fileds){
+        if(err) console.log(err);
+        else{
+            res.render('board_update',{
+                board:rows
+            });
+        }
+    })
+});
+
+router.post('/board_update',upload.single('file'),function(req,res){
+    var sql = 'update board set title=?, content=?, filename=?, filesize=? where no=?';
+    let file = req.file;
+    var par = [req.body.title , req.body.content, file.originalname, file.size, req.body.no];
+    conn.query(sql,par,function(err){
+        if(err)console.log(err);
+        else{
+            res.redirect('/content?no='+req.body.no);
+        }
+    })
+})
+
+router
+
 module.exports = router;
