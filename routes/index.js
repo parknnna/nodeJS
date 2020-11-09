@@ -109,10 +109,12 @@ router.get('/content', function (req, res) {
             conn.query(sql, rows[0].re_g, function(err,rows2, fileds){
                 if(err) console.log(err);
                 else {
+                    var seid=null;
+                    if(req.session.user!=undefined) seid=req.session;
                     res.render('content', {
                         list: rows,
                         re_list : rows2,
-                        session : req.session
+                        session : seid
                     });
                 }
             })

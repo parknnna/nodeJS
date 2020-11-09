@@ -17,9 +17,9 @@
         }
     </script>
     <body>
-        <h1>로그인 화면</h1>
+        <div style="margin-left:20%"><h1>로그인 화면</h1></div>
         <form name="f" action="/login_ok" method="POST">
-            <table>
+            <table align="center">
                 <%
                 if(idon){%>
                     <tr><td colspan="2">아이디 저장<input type="checkbox" name="idon" checked></td></tr>
@@ -29,7 +29,7 @@
                 <tr><td><input type="text" name="id"></td><td><input type="button" value="로그인" onclick="javascript:check();"></td></tr>
                 <%}%>
                 <tr><td><input type="password" name="password"></td><td><input type="button" value="회원가입" onclick="location.href='/member_insert'"></td></tr>
-                <tr><td><input type="button" value="아이디찾기"></td><td><input type="button" value="비밀번호 찾기"></td></tr>
+                <!-- <tr><td><input type="button" value="아이디찾기"></td><td><input type="button" value="비밀번호 찾기"></td></tr> -->
             </table>
         </form>
 

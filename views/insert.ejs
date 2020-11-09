@@ -21,15 +21,17 @@
     <title>insert</title>
   </head>
   <body>
-    <h1>글쓰기</h1>
-    <form name="f" action="/insert2" method="POST" enctype="multipart/form-data">
+    <div style="margin-left:20%"><h1>글쓰기</h1></div>
+    <div style="position : absolute; left:40%">
+    <form name="f" action="/insert2" method="POST" enctype="multipart/form-data">  
         <table width="100%">
-            <tr><td>제목</td><td><input type="text" name="title"></td></tr>
-            <tr><td>글쓴이</td><td><input type="text" name="name" value="<%=session.user.id%>" readonly></td></tr>
-            <tr><td>내용</td><td><textarea name="content" cols="40" rows="7"></textarea></td></tr>
-            <tr><td>사진</td><td><input type="file" name="file"></td></tr>
-            <tr><td colspan="2"><input type="button" value="쓰기" onclick="javascript:check();"></td></tr>
+          <tr><td>제목</td><td><input type="text" name="title"></td></tr>
+          <tr><td>글쓴이</td><td><input type="text" name="name" value="<%=session.user.id%>" readonly></td></tr>
+          <tr><td>내용</td><td><textarea name="content" cols="40" rows="7"></textarea></td></tr>
+          <tr><td>사진</td><td><input type="file" name="file"></td></tr>
+          <tr><td colspan="2"><input type="button" value="쓰기" onclick="javascript:check();"></td></tr>
         </table>
-    </form>
-  </body>
+      </form>
+    </div>
+    </body>
 </html>

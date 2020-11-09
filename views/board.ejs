@@ -11,10 +11,16 @@
                 }
             }
         </script>
+
+        <style>
+            table, th,td{
+                border: 1px solid #000;
+            }
+        </style>
     </head>
     <body>
-        <h1>board</h1>
-        <div align="right" width="100%">
+        <div style="margin-left:20%"><h1>board</h1></div>
+        <div align="right" style="width:80%">
             <%if(session.login){%>
                 <a href="/logout">로그아웃</a>
             <%}else{%>
@@ -23,7 +29,7 @@
             <br>
             <button onclick="javascript:logcheck('<%=session.login%>');">글쓰기</button>
         </div>
-        <table width="100%">
+        <table width="60%" align="center">
             <tr>
                 <th>번호</th>
                 <th>글쓴이</th>

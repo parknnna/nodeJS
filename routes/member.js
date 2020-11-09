@@ -22,7 +22,7 @@ router.post('/member_insert', function (req, res, next) {
         if (err) 
             console.log(err);
         else {
-            res.redirect('/board',{session:session});
+            res.redirect('/board');
         }
     });
 });
