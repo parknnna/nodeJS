@@ -14,6 +14,7 @@ var bodyParser = require('body-parser');
 db_config.connect(conn);
 
 // view engine setup
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 

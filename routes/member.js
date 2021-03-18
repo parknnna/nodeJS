@@ -15,8 +15,8 @@ router.get('/member_insert', function (req, res, next) {
 });
 
 router.post('/member_insert', function (req, res, next) {
-    var sql = "insert into member values(null,?,?,?,?,?)";
-    var params = [req.body.name, req.body.num1, req.body.num2, req.body.id, req.body.password];
+    var sql = "insert into member values(null,?,?,?)";
+    var params = [req.body.name, req.body.id, req.body.password];
 
     conn.query(sql, params, function (err) {
         if (err) 
