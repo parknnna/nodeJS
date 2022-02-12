@@ -4,7 +4,7 @@ var db_info = {
     port: '3306',
     user: 'parknnna',
     password: 'parknnna',
-    database: 'nodejsTest'
+    database: 'nnna'
 }
 
 module.exports = {
