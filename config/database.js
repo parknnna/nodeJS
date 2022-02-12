@@ -2,9 +2,9 @@ var mysql = require('mysql');
 var db_info = {
     host: 'localhost',
     port: '3306',
-    user: 'root',
-    password: '753528af',
-    database: 'test'
+    user: 'parknnna',
+    password: 'parknnna123$',
+    database: 'nnna'
 }
 
 module.exports = {

@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 //DB
-var db_config = require('C:/GitHub/nodeJS/config/database.js');
+var db_config = require('../config/database');
 var conn = db_config.init();
 var bodyParser = require('body-parser');
 
