@@ -1,10 +1,10 @@
-var mysql = require('mysql');
+var mysql = require('mysql2');
 var db_info = {
     host: 'localhost',
     port: '3306',
     user: 'parknnna',
-    password: 'parknnna123$',
-    database: 'nnna'
+    password: 'parknnna',
+    database: 'nodejsTest'
 }
 
 module.exports = {
