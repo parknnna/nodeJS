@@ -2,8 +2,8 @@ var express = require('express');
 var router = express.Router();
 
 //DB
-var db_config = require('../config/database');
-var conn = db_config.init();
+//var db_config = require('../config/database');
+//var conn = db_config.init();
 var bodyParser = require('body-parser');
 
 // 1. multer 미들웨어 등록

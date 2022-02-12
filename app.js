@@ -8,10 +8,10 @@ var session = require('express-session');
 var app = express();
 
 //DB
-var db_config = require(__dirname + '/config/database.js');
-var conn = db_config.init();
+//var db_config = require(__dirname + '/config/database.js');
+//var conn = db_config.init();
 var bodyParser = require('body-parser');
-db_config.connect(conn);
+//db_config.connect(conn);
 
 // view engine setup
 
